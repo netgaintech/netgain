@@ -1,6 +1,7 @@
 // src/App.tsx (COMPLETE REPLACEMENT CODE)
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -57,6 +58,7 @@ const App = () => (
         
         {/* The Router now wraps the entire application */}
         <BrowserRouter>
+        <ScrollToTop />
           <Routes>
             {/* Route 1: The main landing page */}
             <Route path="/" element={<LandingPage />} />
