@@ -1,5 +1,3 @@
-// src/components/Footer.tsx (FINAL CODE WITH CONTACT INFO RESTORED)
-
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Mail, Phone, Instagram } from "lucide-react";
 
@@ -7,18 +5,11 @@ const Footer = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  /**
-   * Advanced scroll handler for all internal page links.
-   * If the user is on a different page (e.g., /future-services), it navigates
-   * to the home page first and then scrolls to the correct section.
-   * If the user is already on the home page, it just scrolls smoothly.
-   */
   const handleScrollClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     
     if (location.pathname !== "/") {
       navigate("/");
-      // Wait for the navigation to complete before scrolling
       setTimeout(() => {
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
@@ -31,6 +22,11 @@ const Footer = () => {
         targetElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
+  };
+
+  // Handler for page-changing links
+  const handlePageLinkClick = () => {
+    window.scrollTo(0, 0);
   };
   
   const footerLinks = [
@@ -45,7 +41,6 @@ const Footer = () => {
       <div className="container px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           
-          {/* Column 1: Brand Info */}
           <div className="md:col-span-2">
             <h3 className="text-xl font-bold mb-4">Netgain <span className="text-primary">Studio</span></h3>
             <p className="text-muted-foreground mb-4">
@@ -53,7 +48,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Column 2: Quick Links */}
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
@@ -64,16 +58,20 @@ const Footer = () => {
                       </a>
                   </li>
               ))}
-              {/* This is the router link for the separate page */}
+              {/* --- MODIFICATION HERE --- */}
               <li>
-                  <Link to="/future-services" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link to="/projects" onClick={handlePageLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
+                      Projects
+                  </Link>
+              </li>
+              <li>
+                  <Link to="/future-services" onClick={handlePageLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                       Future Services
                   </Link>
               </li>
             </ul>
           </div>
 
-          {/* --- Column 3: Contact Info (RESTORED) --- */}
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-2">
@@ -96,7 +94,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Copyright Notice */}
         <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground text-sm">
           <p>&copy; {new Date().getFullYear()} Netgain Studio. All rights reserved.</p>
         </div>

@@ -13,9 +13,10 @@ const Navigation = () => {
 
   const navItems = [
     { name: "Home", href: "/#home" },
-    { name: "About", href: "/#about" },
     { name: "Services", href: "/#services" },
+    { name: "Projects", href: "/projects" },
     { name: "Pricing", href: "/#pricing" },
+    { name: "About", href: "/#about" },
     { name: "Future Services", href: "/future-services" },
   ];
 
@@ -50,6 +51,18 @@ const Navigation = () => {
       }
     }
   };
+  
+  // This new handler will be used for all page-changing links
+  const handlePageLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
+
+  // This handler is for mobile, which also needs to close the menu
+  const handleMobilePageLinkClick = () => {
+    window.scrollTo(0, 0);
+    setIsOpen(false);
+  };
+
 
   const menuListVariants = {};
   const menuItemVariants = {};
@@ -60,7 +73,6 @@ const Navigation = () => {
       <nav className="hidden md:flex fixed top-0 w-full z-50 justify-center pt-6">
         <div className={`flex items-center gap-x-2 bg-neutral-950/50 border border-transparent backdrop-blur-lg rounded-full transition-all duration-300 ${isScrolled ? 'py-2 px-3 !border-neutral-700/80' : ''}`}>
           
-          {/* --- NEW ANIMATED LOGO --- */}
           <a href="/#home" onClick={(e) => handleScrollLinkClick(e, "/#home")} className="flex items-center bg-black rounded-full p-2">
             <motion.span 
               className="text-xl font-bold pl-2 pr-1"
@@ -78,7 +90,8 @@ const Navigation = () => {
                   {item.name}
                 </a>
               ) : (
-                <Link key={item.name} to={item.href} className="text-sm text-neutral-400 hover:text-white transition-colors">
+                // --- MODIFICATION HERE ---
+                <Link key={item.name} to={item.href} onClick={handlePageLinkClick} className="text-sm text-neutral-400 hover:text-white transition-colors">
                   {item.name}
                 </Link>
               )
@@ -104,7 +117,6 @@ const Navigation = () => {
           {!isOpen && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed top-0 w-full z-50 p-4">
               <div className={`flex items-center justify-between h-16 rounded-2xl px-4 transition-colors duration-300 ${isScrolled ? 'bg-neutral-900/80 backdrop-blur-md' : 'bg-transparent'}`}>
-                {/* Mobile Logo Also Animated */}
                 <a href="/#home" className="flex items-center" onClick={(e) => handleScrollLinkClick(e, "/#home")}>
                   <span className="text-xl font-bold">
                     <span className="logo-gradient-text">Netgain</span> <span className="text-neutral-400">Studio</span>
@@ -117,7 +129,6 @@ const Navigation = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
         
         <AnimatePresence>
           {isOpen && (
@@ -130,13 +141,12 @@ const Navigation = () => {
               <motion.div className="flex flex-col items-center justify-center h-full space-y-8" variants={menuListVariants} initial="hidden" animate="visible">
                 {navItems.map((item) => (
                    item.href.startsWith('/#') ? (
-                    // Render a smooth-scrolling <a> tag for mobile
                     <motion.a key={item.name} href={item.href} className="text-4xl font-medium tracking-wide text-neutral-200" onClick={(e) => handleScrollLinkClick(e, item.href)} variants={menuItemVariants}>
                       {item.name}
                     </motion.a>
                    ) : (
-                    // Render a router <Link> for mobile
-                    <Link key={item.name} to={item.href} className="text-4xl font-medium tracking-wide text-neutral-200" onClick={() => setIsOpen(false)}>
+                    // --- MODIFICATION HERE ---
+                    <Link key={item.name} to={item.href} className="text-4xl font-medium tracking-wide text-neutral-200" onClick={handleMobilePageLinkClick}>
                         {item.name}
                     </Link>
                    )

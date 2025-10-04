@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Globe, Video, Code, Zap } from "lucide-react";
+import { ArrowRight, Globe, Video, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import ProjectCard from "@/components/ProjectCard";
+import { projectsData } from "@/lib/projects-data";
 
 // Array of words that will be rotated in the heading
 const rotatingWords = [
@@ -15,6 +18,9 @@ const rotatingWords = [
 
 const Index = () => {
   const [wordIndex, setWordIndex] = useState(0);
+
+  // Take the first 4 projects from your data file to feature on the home page
+  const featuredProjects = projectsData.slice(0, 4);
 
   // This hook sets up a timer to cycle through the words automatically
   useEffect(() => {
@@ -161,9 +167,63 @@ const Index = () => {
           </p>
         </motion.div>
       </section>
+      
+      {/* --- NEW FEATURED PROJECTS SECTION --- */}
+      <section id="projects" className="container px-4 py-20 bg-secondary/50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl md:text-5xl font-bold mb-4"
+            >
+              OUR RECENT WORK
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-xl text-muted-foreground"
+            >
+              Here are a few projects we're proud of.
+            </motion.p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {featuredProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 + (index * 0.1) }}
+              >
+                <ProjectCard project={project} />
+              </motion.div>
+            ))}
+          </div>
 
-      {/* Services Overview Section */}
-      <section className="container px-4 py-20 bg-secondary/50">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <Link to="/projects">
+              <Button size="lg" variant="outline">
+                View All Projects <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Overview Section (This is a simplified version from your original, you can keep it) */}
+      <section className="container px-4 py-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">What We Offer</h2>

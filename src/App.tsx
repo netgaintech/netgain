@@ -14,18 +14,15 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Pricing from "./pages/Pricing";
-import FutureServices from "./pages/FutureServices"; // This is now a standalone page
+import FutureServices from "./pages/FutureServices";
 import Contact from "./pages/Contact";
+import ProjectsPage from "./pages/projects/ProjectsPage";
+import ProjectDetailPage from "./pages/projects/ProjectDetailPage"; // <-- 1. IMPORT THE NEW COMPONENT
 
 const queryClient = new QueryClient();
 
-/**
- * This component represents the main single-page landing site.
- * It contains all the sections that can be scrolled to.
- */
 const LandingPage = () => (
   <>
-    {/* Navigation is shared */}
     <Navigation />
     <main>
       <section id="home">
@@ -37,6 +34,9 @@ const LandingPage = () => (
       <section id="services">
         <Services />
       </section>
+      <section id="projects">
+        {/* This content is inside Index.tsx */}
+      </section>
       <section id="pricing">
         <Pricing />
       </section>
@@ -44,7 +44,6 @@ const LandingPage = () => (
         <Contact />
       </section>
     </main>
-    {/* Footer is shared */}
     <Footer />
   </>
 );
@@ -56,15 +55,22 @@ const App = () => (
         <Toaster />
         <Sonner />
         
-        {/* The Router now wraps the entire application */}
         <BrowserRouter>
         <ScrollToTop />
           <Routes>
             {/* Route 1: The main landing page */}
             <Route path="/" element={<LandingPage />} />
             
-            {/* Route 2: The new, separate page for Future Services */}
+            {/* Route 2: Future Services page */}
             <Route path="/future-services" element={<FutureServices />} />
+
+            {/* Route 3: The main projects gallery */}
+            <Route path="/projects" element={<ProjectsPage />} />
+            
+            {/* --- 2. ADD THE NEW DYNAMIC ROUTE --- */}
+            {/* The ":" tells the router that "projectId" is a variable */}
+            <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
+            
           </Routes>
         </BrowserRouter>
         
