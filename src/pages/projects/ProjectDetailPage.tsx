@@ -4,16 +4,12 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink, Tag, Video, Code } from "lucide-react";
+import { ArrowLeft, ExternalLink, Video, Code } from "lucide-react";
 
 const ProjectDetailPage = () => {
-  // 1. Extract the project ID (e.g., "netgain-portfolio-website") from the URL
   const { projectId } = useParams<{ projectId: string }>();
-
-  // 2. Find the project in our data array that matches this ID
   const project = projectsData.find((p) => p.id === projectId);
 
-  // 3. If no project is found for the given ID, display a "not found" message
   if (!project) {
     return (
       <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -35,7 +31,6 @@ const ProjectDetailPage = () => {
     );
   }
 
-  // 4. If the project is found, render its details
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
@@ -47,10 +42,15 @@ const ProjectDetailPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Link to="/projects" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center mb-6">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to All Projects
-            </Link>
+            {/* --- THIS IS THE UPDATED CODE --- */}
+            <Button asChild variant="ghost" className="mb-6 -ml-4 text-muted-foreground hover:text-foreground">
+                <Link to="/projects">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to All Projects
+                </Link>
+            </Button>
+            {/* --- END OF UPDATE --- */}
+
             <p className="text-primary font-semibold mb-2">{project.category}</p>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{project.title}</h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl">{project.shortDescription}</p>
