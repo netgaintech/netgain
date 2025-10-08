@@ -1,0 +1,17 @@
+# ===================================================================
+# robots.txt for Netgain Studio (https://www.netgainstudio.com/)
+#
+# This file provides instructions to web crawlers.
+# ===================================================================
+
+# Rule for all crawlers (e.g., Googlebot, Bingbot, etc.)
+User-agent: *
+
+# The "Allow" directive gives full access to the entire site.
+Allow: /
+
+# No parts of the site are disallowed.
+Disallow:
+
+# The full, absolute URL to your sitemap file.
+Sitemap: https://www.netgainstudio.com/sitemap.xml

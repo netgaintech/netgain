@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ===================================================================
+  sitemap.xml for Netgain Studio (https://www.netgainstudio.com/)
+  
+  This file lists all important pages for search engines to index.
+  ===================================================================
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Page 1: The Main Landing Page -->
+  <url>
+    <loc>https://www.netgainstudio.com/</loc>
+    <lastmod>2023-10-27T12:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Page 2: The Projects Page -->
+  <url>
+    <loc>https://www.netgainstudio.com/projects</loc>
+    <lastmod>2023-10-27T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Page 3: The Future Services Page -->
+  <url>
+    <loc>https://www.netgainstudio.com/future-services</loc>
+    <lastmod>2023-10-27T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
